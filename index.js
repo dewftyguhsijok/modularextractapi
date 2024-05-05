@@ -1,18 +1,9 @@
-const binarySearchRecursive = (
-  arr,
-  target,
-  left = 0,
-  right = arr.length - 1,
-) => {
-  if (left > right) {
-    return -1;
+function groupAnagrams(strs) {
+  const map = new Map();
+  for (const str of strs) {
+    const sortedStr = str.split("").sort().join("");
+    if (!map.has(sortedStr)) map.set(sortedStr, []);
+    map.get(sortedStr).push(str);
   }
-  const mid = Math.floor((left + right) / 2);
-  if (arr[mid] === target) {
-    return mid;
-  } else if (arr[mid] < target) {
-    return binarySearchRecursive(arr, target, mid + 1, right);
-  } else {
-    return binarySearchRecursive(arr, target, left, mid - 1);
-  }
-};
+  return [...map.values()];
+}
